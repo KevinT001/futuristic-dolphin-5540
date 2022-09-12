@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "US 2 Mechanic SHOW page" do
-  it 'Visitor can see the workers name, experience, and rides they are working on' do 
+  it 'Visitor can see the workers name, experience, and rides they are working on, excluding closed rides' do 
     bob = Mechanic.create!(name: "Bob", years_experience: "4")
     patrick = Mechanic.create!(name: "Patrick", years_experience: "5")
     krabs = Mechanic.create!(name: "Krabs", years_experience: "6")
@@ -15,15 +15,16 @@ RSpec.describe "US 2 Mechanic SHOW page" do
 
     jaws = universal.rides.create!(name: 'Jaws', thrill_rating: 5, open: true)
     MechanicRide.create!(mechanic_id: bob.id, ride_id: scrambler.id)
+    MechanicRide.create!(mechanic_id: bob.id, ride_id: ferris.id)
     
 
     visit "/mechanics/#{bob.id}"
 
-    expect(page). to have_content("Name: Bob")
-    expect(page). to have_content("Years of Experience: 4")
-    expect(page). to have_content("Rides worked on: ")
-    
+    expect(page).to have_content("Name: Bob")
+    expect(page).to have_content("Years of Experience: 4")
+    expect(page).to have_content("Rides worked on: ")
 
-
+    expect(page).to_not have_content("Krabs")
+    expect(page).to_not have_content("Ferris Wheel")
   end 
 end
