@@ -31,7 +31,7 @@ RSpec.describe 'US_1' do
 
       visit '/mechanics'
 
-      expect(page).to have_content("5")
+      expect(page).to have_content"Average Years of Experience for all mechanics: 5"
     end
   end
 end
