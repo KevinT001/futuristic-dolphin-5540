@@ -4,9 +4,8 @@ class Mechanic < ApplicationRecord
   has_many :rides, through: :mechanic_rides 
 
   
-  def mechanic_average_expereience
-    
-
+  def self.average_years_experience
+    average(:years_experience)
   end
 
 end
