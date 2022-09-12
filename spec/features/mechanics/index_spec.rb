@@ -10,9 +10,9 @@ RSpec.describe 'US_1' do
     end
 
     it 'Visitor to see a list of all mechanic names and years of exp' do
-      bob = Mechanic.create!(name: "Bob", years_experience: "4")
-      patrick = Mechanic.create!(name: "Patrick", years_experience: "5")
-      krabs = Mechanic.create!(name: "Krabs", years_experience: "6")
+      bob = Mechanic.create!(name: "Bob", years_experience: 4)
+      patrick = Mechanic.create!(name: "Patrick", years_experience: 5)
+      krabs = Mechanic.create!(name: "Krabs", years_experience: 6)
       visit '/mechanics'
 
       expect(page).to have_content("Bob")
@@ -24,14 +24,14 @@ RSpec.describe 'US_1' do
 
     end
 
-    xit 'Visitor to see average years of experience for all mechanics' do 
+    it 'Visitor to see average years of experience for all mechanics' do 
       bob = Mechanic.create!(name: "Bob", years_experience: "4")
       patrick = Mechanic.create!(name: "Patrick", years_experience: "5")
       krabs = Mechanic.create!(name: "Krabs", years_experience: "6")
-      
+
       visit '/mechanics'
 
-      expect(page).to have_content("")
+      expect(page).to have_content("5")
     end
   end
 end
